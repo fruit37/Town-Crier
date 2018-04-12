@@ -1,4 +1,4 @@
-/* * Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+/* * Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
  *
  * Permission to use the "TownCrier" software ("TownCrier"), officially
  * docketed at the Center for Technology Licensing at Cornell University
@@ -44,7 +44,7 @@
 #define TOWN_CRIER_ENCODING_H
 
 #include "commons.h"
-#include "Log.h"
+#include "log.h"
 
 #include <vector>
 #include <array>
@@ -104,13 +104,9 @@ class bytes20: public RLPSerializable {
     rlp_string(_b.begin(), _b.end(), out);
   }
   void dump(const char* title) {
-#ifdef DEBUG
-    int debugging;
-    ocall_is_debug(&debugging);
-    if (debugging) {
-      LL_DEBUG("in tostring");
-      hexdump(title, _b.data(), _b.size());
-    }
+#ifndef NDEBUG
+    LL_DEBUG("in tostring");
+    hexdump(title, _b.data(), _b.size());
 #endif
   }
 };

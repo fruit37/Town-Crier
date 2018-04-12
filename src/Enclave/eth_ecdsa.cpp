@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -47,12 +47,13 @@
 #include <stdexcept>
 #include <string>
 
-using std::runtime_error;
-
 #include "debug.h"
-#include "Log.h"
+#include "log.h"
 #include "eth_ecdsa.h"
 #include "external/keccak.h"
+#include "../Common/macros.h"
+
+using std::runtime_error;
 
 #if !defined(MBEDTLS_CONFIG_FILE)
 #include "mbedtls/config.h"

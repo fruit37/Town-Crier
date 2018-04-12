@@ -1,4 +1,4 @@
-/* * Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+/* * Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
  *
  * Permission to use the "TownCrier" software ("TownCrier"), officially
  * docketed at the Center for Technology Licensing at Cornell University
@@ -48,7 +48,7 @@
 #include <string>
 #include <cstdint>
 
-#include "Log.h"
+#include "log.h"
 #include "encoding.h"
 
 #define ROUND_TO_32(x) ((x + 31) / 32 * 32)

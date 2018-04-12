@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -41,15 +41,11 @@
 // Google Faculty Research Awards, and a VMWare Research Award.
 //
 
+#include <propertyconfigurator.h>
 #include "gtest/gtest.h"
-
-#define LOGURU_IMPLEMENTATION 1
-#include "Common/Log.h"
+#include "App/logging.h"
 
 int main(int argc, char **argv) {
-  loguru::g_stderr_verbosity = LOG_LEVEL_INFO;
-  loguru::init(argc, (const char **) argv);
-
   ::testing::InitGoogleTest(&argc, argv);
   int ret = RUN_ALL_TESTS();
   return ret;

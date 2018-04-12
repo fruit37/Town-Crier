@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -45,8 +45,8 @@
 #include <stdlib.h>
 #include <debug.h>
 #include "tls_client.h"
-#include "scrapers.h"
-#include "Log.h"
+#include "scrapers/scrapers.h"
+#include "../log.h"
 
 
 int yahoo_self_test(){

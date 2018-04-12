@@ -1,4 +1,4 @@
-/* * Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+/* * Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
  *
  * Permission to use the "TownCrier" software ("TownCrier"), officially
  * docketed at the Center for Technology Licensing at Cornell University
@@ -40,22 +40,42 @@
  * Google Faculty Research Awards, and a VMWare Research Award.
  */
 
-#ifndef TOWN_CRIER_SCRAPERS_H
-#define TOWN_CRIER_SCRAPERS_H
+#include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <log4cxx/logger.h>
 
-#include <stdint.h>
-double get_closing_price (int month, int day, int year, const char* code);
 
-int get_flight_delay(uint64_t unix_epoch_time, const char* flight, int* resp);
+#ifndef APP_LOG_H
+#define APP_LOG_H
 
-//int get_steam_transaction(const char** item_name_list, int item_list_len, const char* other, unsigned int time_cutoff, const char* key, int* resp);
+constexpr auto LOGGING_CONF_FILE = "/tc/conf/logging.conf";
 
-int scraper_dispatch();
-int google_current(const char* symbol, double* r);
-int yahoo_current(const char* symbol, double* r);
-int bloomberg_current(const char* symbol, double* r);
-int ups_track(const char* tracking_num, int status);
-//int coinmarketcap_current(const char* symbol, double* r);
-//int weather_current(unsigned int zip, double* r);
-
+// a universal false for C++/C
+#ifdef    __cplusplus
+#define _FALSE false
+#else
+#define _FALSE 0
 #endif
+
+/***************************************************/
+/******* Logging utilities for untrusted world *****/
+/***************************************************/
+
+extern char log_buffer[BUFSIZ];
+
+#define LOG_TO_LOG4CXX(FUNC, fmt, arg...) \
+  do { \
+    snprintf(log_buffer, BUFSIZ, fmt, ##arg); \
+    FUNC(logger, log_buffer) } \
+  while (_FALSE);
+
+#define LL_LOG(fmt, arg...)       LOG_TO_LOG4CXX(LOG4CXX_TRACE, fmt, ##arg)
+#define LL_DEBUG(fmt, arg...)     LOG_TO_LOG4CXX(LOG4CXX_DEBUG, fmt, ##arg)
+#define LL_TRACE(fmt, arg...)     LOG_TO_LOG4CXX(LOG4CXX_TRACE, fmt, ##arg)
+#define LL_INFO(fmt, arg...)      LOG_TO_LOG4CXX(LOG4CXX_INFO, fmt, ##arg)
+#define LL_WARNING(fmt, arg...)   LOG_TO_LOG4CXX(LOG4CXX_WARN, fmt, ##arg)
+#define LL_ERROR(fmt, arg...)     LOG_TO_LOG4CXX(LOG4CXX_ERROR, fmt, ##arg)
+#define LL_CRITICAL(fmt, arg...)  LOG_TO_LOG4CXX(LOG4CXX_FATAL, fmt, ##arg)
+
+#endif // ENC_LOG_H

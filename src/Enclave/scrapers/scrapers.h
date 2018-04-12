@@ -1,4 +1,4 @@
-/* * Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+/* * Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
  *
  * Permission to use the "TownCrier" software ("TownCrier"), officially
  * docketed at the Center for Technology Licensing at Cornell University
@@ -40,65 +40,24 @@
  * Google Faculty Research Awards, and a VMWare Research Award.
  */
 
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
+#ifndef TOWN_CRIER_SCRAPERS_H
+#define TOWN_CRIER_SCRAPERS_H
 
-#ifdef ENCLAVE_STD_ALT
-// printf
-#include "glue.h"
-// for ocall_log_FATAL etc
-#include "Enclave_t.h"
-#else
-#include "loguru.hpp"
-#endif
+#include <stdint.h>
+#include "../Common/macros.h"
 
+double get_closing_price (int month, int day, int year, const char* code);
 
-#ifndef ENC_LOG_H
-#define ENC_LOG_H
+int get_flight_delay(uint64_t unix_epoch_time, const char* flight, int* resp);
 
-#ifdef    __cplusplus
-#define _FALSE false
-#else
-#define _FALSE 0
-#endif
+//int get_steam_transaction(const char** item_name_list, int item_list_len, const char* other, unsigned int time_cutoff, const char* key, int* resp);
 
-#ifdef    __cplusplus
-extern "C" {
-#endif
-
-#ifdef ENCLAVE_STD_ALT
-// macros for use in the enclave
-#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
-
-#define LOG(level,fmt,arg... ) \
-do { \
-  char __log_buf[BUFSIZ] = {'\0'};\
-  snprintf(__log_buf, BUFSIZ, "[%s:%d] " fmt, __FILENAME__, __LINE__, ##arg);\
-  ocall_log_##level(__log_buf);\
-} while(_FALSE)
-#else
-#define LOG(level,fmt,arg... ) \
-do { \
-  LOG_F(level,fmt,##arg ); \
-} while(_FALSE)
-#endif
-
-#define LOG_LEVEL_TRACE 3
-#define LOG_LEVEL_DEBUG 2
-#define LOG_LEVEL_LOG 1
-#define LOG_LEVEL_INFO 0
-
-#define LL_TRACE( fmt, arg... )     LOG(3, fmt, ##arg )
-#define LL_DEBUG( fmt, arg... )     LOG(2, fmt, ##arg )
-#define LL_LOG( fmt, arg... )       LOG(1, fmt, ##arg )
-#define LL_INFO( fmt, arg... )      LOG(INFO,    fmt, ##arg )
-#define LL_WARNING( fmt, arg... )   LOG(WARNING, fmt, ##arg )
-#define LL_ERROR( fmt, arg... )     LOG(ERROR, fmt, ##arg )
-#define LL_CRITICAL( fmt, arg... )  LOG(ERROR, fmt, ##arg )
-
-#ifdef __cplusplus
-}
-#endif
+int scraper_dispatch();
+int google_current(const char* symbol, double* r);
+int yahoo_current(const char* symbol, double* r);
+int bloomberg_current(const char* symbol, double* r);
+int ups_track(const char* tracking_num, int status);
+//int coinmarketcap_current(const char* symbol, double* r);
+//int weather_current(unsigned int zip, double* r);
 
 #endif

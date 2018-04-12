@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -47,10 +47,12 @@
 #include "App/utils.h"
 #include "App/key_utils.h"
 #include "App/test/test-data.h"
+#include "App/logging.h"
 
 class SGXTestBase : public ::testing::Test {
  protected:
   sgx_enclave_id_t eid;
+
   virtual void SetUp() {
 #ifdef TC_SGX_IN_RELEASE_MODE
     initialize_enclave("enclave.release.so", &eid);

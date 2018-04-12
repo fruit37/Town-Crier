@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -63,7 +63,7 @@ TEST_F(Transaction, All) {
     transaction_rlp_test(eid, &ret);
     EXPECT_EQ(0, ret);
   } catch (tc::EcallException &e) {
-    LL_CRITICAL(e.what());
+    std::cerr << "Error: " << e.what() << std::endl;
     FAIL();
   }
 }

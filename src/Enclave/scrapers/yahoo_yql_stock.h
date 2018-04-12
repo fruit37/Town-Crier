@@ -1,4 +1,4 @@
-/* * Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+/* * Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
  *
  * Permission to use the "TownCrier" software ("TownCrier"), officially
  * docketed at the Center for Technology Licensing at Cornell University
@@ -52,7 +52,7 @@
 #include <ctime>
 
 #include "Scraper.h"
-#include "Log.h"
+#include "../log.h"
 #include "yahoo_yql.h"
 #include "external/picojson.h"
 #include "commons.h"

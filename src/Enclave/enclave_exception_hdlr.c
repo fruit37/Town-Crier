@@ -1,4 +1,4 @@
-/* * Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+/* * Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
  *
  * Permission to use the "TownCrier" software ("TownCrier"), officially
  * docketed at the Center for Technology Licensing at Cornell University
@@ -41,7 +41,7 @@
  */
 
 #include "sgx_trts_exception.h"
-#include "Log.h"
+#include "log.h"
 
 #ifdef ENCLAVE_EXCEPTION_HANDLING
 int UD_handler(sgx_exception_info_t *e) {

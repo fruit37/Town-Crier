@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -59,9 +59,9 @@ TEST_F(Attestation, att) {
   try {
     vector<uint8_t> att;
     get_attestation(eid, &att);
-    LL_INFO("attestation: %s", bufferToHex(att, true).c_str());
+    std::cout << "attestation: " << bufferToHex(att, true) << std::endl;
   } catch (const exception& e) {
-    LL_CRITICAL("error: %s", e.what());
+    std::cerr << "error: " << e.what() << std::endl;
     FAIL();
   }
 }

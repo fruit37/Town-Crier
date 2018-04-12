@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -55,12 +55,20 @@
 #include "App/Enclave_u.h"
 #include "App/utils.h"
 #include "Common/macros.h"
-#include "Common/Log.h"
+#include "App/logging.h"
 #include "Common/external/base64.hxx"
 
 using std::string;
 using std::cout;
 using std::endl;
+
+namespace tc {
+namespace keyUtils {
+log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("key_utils.cpp"));
+}
+}
+
+using tc::keyUtils::logger;
 
 /*!
  * unseal the secret signing and return the corresponding address

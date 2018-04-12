@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -42,3 +42,33 @@
 //
 
 #include "App/bookkeeping/database.h"
+
+namespace tc {
+namespace database {
+log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("bookkeeping/database.h"));
+}
+}
+
+using tc::database::logger;
+
+bool OdbDriver::isProcessed(const string &tx_hash, int retryThreshold) const {
+  bool ret = false;
+  transaction t(db->begin());
+  record_ptr tr(
+      db->query_one<TransactionRecord>(query_record::tx_hash == tx_hash));
+  if (!tr) {
+    LL_DEBUG("tx %s is not processed", tx_hash.c_str());
+    ret = false;
+  } else {
+    ret =
+        tr->getNumOfRetrial() >= retryThreshold || !tr->getResponse().empty();
+    LL_DEBUG("tx %s has been tried %d (out of %d) times", tx_hash.c_str(),
+             tr->getNumOfRetrial(), retryThreshold);
+    LL_DEBUG(
+        "tx %s has been responded with %s", tx_hash.c_str(),
+        tr->getResponse().empty() ? "not yet" : tr->getResponse().c_str());
+  }
+  t.commit();
+
+  return ret;
+}

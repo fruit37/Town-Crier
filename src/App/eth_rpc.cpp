@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -58,8 +58,16 @@
 #include "App/types.h"
 #include "App/eth_rpc.h"
 #include "Common/Constants.h"
-#include "Common/Log.h"
+#include "App/logging.h"
 #include "App/Enclave_u.h"
+
+namespace tc {
+namespace gethRPC{
+log4cxx::LoggerPtr logger(log4cxx::Logger::getLogger("eth_rpc.cpp"));
+}
+}
+
+using tc::gethRPC::logger;
 
 ethRPCClient *geth_connector;
 

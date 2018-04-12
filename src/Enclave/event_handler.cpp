@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+// Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
 //
 // Permission to use the "TownCrier" software ("TownCrier"), officially
 // docketed at the Center for Technology Licensing at Cornell University
@@ -45,7 +45,7 @@
 #include <string>
 #include <inttypes.h>
 
-#include "scrapers.h"
+#include "scrapers/scrapers.h"
 #include "scrapers/yahoo_yql_stock.h"
 #include "scrapers/Scraper.h"
 #include "scrapers/flight.h"
@@ -62,7 +62,7 @@
 #include "external/keccak.h"
 #include "Constants.h"
 #include "time.h"
-#include "Log.h"
+#include "log.h"
 
 #include "hybrid_cipher.h"
 

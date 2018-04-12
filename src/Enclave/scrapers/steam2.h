@@ -1,4 +1,4 @@
-/* * Copyright (c) 2016-2017 by Cornell University.  All Rights Reserved.
+/* * Copyright (c) 2016-2018 by Cornell University.  All Rights Reserved.
  *
  * Permission to use the "TownCrier" software ("TownCrier"), officially
  * docketed at the Center for Technology Licensing at Cornell University
@@ -51,7 +51,7 @@
 #include "Scraper.h"
 #include "tls_client.h"
 #include "utils.h"
-#include "Log.h"
+#include "../log.h"
 #include "external/picojson.h"
 
 class SteamScraper : Scraper {
